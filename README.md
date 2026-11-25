@@ -4,7 +4,7 @@
 
 ## 怎麼跑
 
-需要 Python 3.10 以上、numpy、matplotlib。以下指令都在「仿生科技」資料夾執行。
+需要 Python 3.10 以上、numpy、matplotlib。以下指令都在「Biomimetics」資料夾執行。
 
 ```bash
 python -m unittest sim.tests.test_workpackage_a -v
@@ -95,14 +95,14 @@ measured, truth = generate(get_scenario("near_far"), make_config("mid", seed=0))
 
 16 項測試全部通過（2026/11/25）。
 
-| 驗收標準（1-1、0-2） | 測試 | 結果 |
-| --- | --- | --- |
-| 報告的兩個例子：7.32° ↔ 0.50 m、1.83° ↔ 2.00 m | `test_report_examples` | 正算與反算誤差 < 0.005°、< 1% |
-| 無雜訊時由視線角反算距離誤差 < 1% | `test_noise_free_distance_error_below_1_percent` | 4 支腳本的注視樣本全部通過（實際誤差在 10⁻⁹ 等級） |
-| 雜訊統計與設定值相差 < 10% | `test_noise_sigma_matches_setting`、`test_random_blink_rate_and_duration`、`test_dropout_rate` | σ = 0.5／1／2°、眨眼頻率 15 次／分、遺失率 5% 都在 10% 內 |
-| 掃視 20–80 ms、眨眼 100–300 ms | `test_saccade_duration_20_to_80_ms`、`test_random_blink_rate_and_duration` | 通過 |
-| 4 支必做腳本都能產生，每支都有真值時間序列 | `test_all_required_generate_with_every_preset` | 4 支 × 4 種預設都通過 |
-| 固定亂數種子可重現（1-7 需要） | `test_reproducible` | 通過 |
+| 驗收標準（1-1、0-2）                         | 測試                                                                                           | 結果                                       |
+| ------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| 報告的兩個例子：7.32° ↔ 0.50 m、1.83° ↔ 2.00 m | `test_report_examples`                                                                       | 正算與反算誤差 < 0.005°、< 1%                    |
+| 無雜訊時由視線角反算距離誤差 < 1%                   | `test_noise_free_distance_error_below_1_percent`                                             | 4 支腳本的注視樣本全部通過（實際誤差在 10⁻⁹ 等級）            |
+| 雜訊統計與設定值相差 < 10%                      | `test_noise_sigma_matches_setting`、`test_random_blink_rate_and_duration`、`test_dropout_rate` | σ = 0.5／1／2°、眨眼頻率 15 次／分、遺失率 5% 都在 10% 內 |
+| 掃視 20–80 ms、眨眼 100–300 ms             | `test_saccade_duration_20_to_80_ms`、`test_random_blink_rate_and_duration`                    | 通過                                       |
+| 4 支必做腳本都能產生，每支都有真值時間序列                | `test_all_required_generate_with_every_preset`                                               | 4 支 × 4 種預設都通過                           |
+| 固定亂數種子可重現（1-7 需要）                     | `test_reproducible`                                                                          | 通過                                       |
 
 ## 注意事項
 
@@ -113,7 +113,7 @@ measured, truth = generate(get_scenario("near_far"), make_config("mid", seed=0))
 5. **可信度不會洩漏掃視。** 可信度只在眨眼前後 50 ms（眼皮半閉）降到 0.3–0.6，那段雜訊也放大 3 倍；掃視期間可信度照常。1-4 要從視線角的變化速度自己判斷掃視。
 6. **目標偏離正前方時，報告的公式 z = b / [2 tan(θ/2)] 會有誤差**（偏 15° 時約 3.4%）。`geometry.distance_from_angles` 用兩條視線交點計算，任何方向都精確。
 
-## 我自己做的假設，請組員確認
+## 待確認
 
 | 項目 | 目前設定 | 為什麼這樣設、可以怎麼改 |
 | --- | --- | --- |
